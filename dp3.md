@@ -13,3 +13,11 @@
 输出: 6
 
 **思路**
+
+1. 将这个图当作直方图，每行作为一个直方，得到每行的高，再用largestRectangleArea来计算
+2. 一行一行往下找，当n-1行为最大时，第n行一定为最大。假设record[i][0], record[i][1], record[i][2]分别表示当前行第i列所能形成的最大面积的矩阵的左边界、右边界和高。
+每遍历完一行:
+> 对于第i行第k列元素为1的点，我们可以假设它在本行所形成的左边界为left，右边界为right，则在更新record[k][]数组时，左边界取left和record[k][0]大者，右边界取right和record[k][1]小者，高度取record[k][2]+1。然后根据新的record计算面积，如果更大则更新ans。
+[参考链接](https://blog.csdn.net/CristianoJason/article/details/52436342)
+3. 动态规划的方法，但是没有图，还没看懂
+
