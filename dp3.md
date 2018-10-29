@@ -21,3 +21,44 @@
 [参考链接](https://blog.csdn.net/CristianoJason/article/details/52436342)
 3. 动态规划的方法，但是没有图，还没看懂
 
+**解题**
+1.
+```c++
+   int largetsRectangleArea(vector<int>& hist){
+        int maxArea = 0,n=hist.size(),i=0;
+        vector<int> store=hist;
+        stack<int> s;
+        while(i<n) {
+            if(s.empty()||store[s.top()]<=store[i]){
+                s.push(i++);
+            }else{
+                int t = s.top();
+                s.pop();
+                maxArea=max(maxArea,store[t]*(s.empty()?i:i-s.top()-1));
+            }
+        }
+        while(!s.empty()){
+            int t = s.top();
+            s.pop();
+            maxArea=max(maxArea,store[t]*(s.empty()?i:i-s.top()-1));
+        }
+    return maxArea;
+    }
+    int maximalRectangle(vector<vector<char>>& matrix) {
+      int row = matrix.size();
+      if(row==0) return 0;
+      int col=matrix[0].size();
+      if(col==0) return 0;
+      int maxArea = 0;
+      for(int i=0;i<row;i++) {
+        // 每一行维护一个数组来保存前几行的高度
+        vector<int> heights(col,0);
+        for(int j=0;j<col;j++) {
+          int temp = i;
+          while(temp>=0&&matrix[temp--][j]=='1') heights[j]++;
+        }
+        maxArea = max(largetsRectangleArea(heights),maxArea);
+      }
+      return maxArea;
+    }
+```
