@@ -1,21 +1,23 @@
-#include<iostream>
-#include<cstdio>
-#include<algorithm>
-#include<stdio.h>
-#include<vector>
-#include<stack>
-using namespace std;
-int main(){
-    int evalRPN(vector<string>& tokens);
-    string arr[] = {
-      "3","-4","+"
-    };
-    vector<string> exa(arr,arr+3);
-    int res = evalRPN(exa);
-    cout<<res;
-}
- 
-    bool isFlag(string s){
+## 题目逆波兰表达式求值
+
+根据逆波兰表示法，求表达式的值。
+
+有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。
+
+说明：
+
+整数除法只保留整数部分。
+给定逆波兰表达式总是有效的。换句话说，表达式总会得出有效数值且不存在除数为 0 的情况。
+示例 1：
+
+输入: ["2", "1", "+", "3", "*"]
+输出: 9
+解释: ((2 + 1) * 3) = 9
+
+## 思路
+- 维护一个栈，遍历数组，当是当前元素数字时入栈，不是数字则2次弹出栈顶元素，并进行计算，将结果push到栈里。
+```c++
+ bool isFlag(string s){
         if(s == "+" || s == "-" || s == "/" || s == "*") {
             return true;
         }
@@ -46,14 +48,5 @@ int main(){
             }else{
                     int right = s.top();
                     s.pop();
-                    int left = s.top();
-                    s.pop();
-                    if(cur=="*") res = right * left;
-                    if(cur=="/") res = left / right;
-                    if(cur=="+") res = left + right;
-                    if(cur=="-") res = left - right;
-                     s.push(res);
-                }
-            }
-        return res;
-    }
+    
+```
