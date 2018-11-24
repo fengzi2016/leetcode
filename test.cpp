@@ -7,7 +7,29 @@
 
 using namespace std;
 
- 
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+ };
+bool isPalindrome(ListNode* head) {
+        stack<ListNode*> s;
+        ListNode* tmp = head;
+        while(tmp){
+            s.push(tmp);
+            tmp = tmp->next;
+        }
+        
+        tmp = head;
+        while(tmp){
+            ListNode* cur = s.top();
+            cout<<cur->val<<endl;
+            s.pop();
+            if(cur->val != tmp->val) return false;
+            tmp = tmp -> next;
+        }
+        return true;
+    }
 
     class MyLinkedList {
 public:
@@ -115,8 +137,13 @@ public:
         return false;
         
     }
+
 int main(){
-    ListNode* l;
+    ListNode* head = new ListNode(1);
+    ListNode* tmp = new ListNode(1);
+    head->next = tmp;
+    isPalindrome(head);
+    
     
 // MyLinkedList obj = new MyLinkedList();
 //  int param_1 = obj.get(1);

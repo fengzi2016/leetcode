@@ -1,3 +1,4 @@
+
 ```c++
 struct SinglyListNode {
     int val;
