@@ -1,3 +1,4 @@
+```c++
 struct SinglyListNode {
     int val;
     SinglyListNode *next;
@@ -73,3 +74,4 @@ struct SinglyListNode {
         SinglyListNode* next = tmp->next;
         tmp->next = next->next;
     }
+```
