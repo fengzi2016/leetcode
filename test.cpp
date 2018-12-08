@@ -4,26 +4,33 @@
 #include<stdio.h>
 #include<vector>
 #include<stack>
-
+#include <unordered_map>
+#include<unordered_set>
 using namespace std;
-int dfs(vector<vector<int> >& matrix,int i,int j){
-        if(i<0||i>=matrix.size()||j<0||j>=matrix[0].size())return 0;
-        return min((dfs(matrix,i+1,j),dfs(matrix,i,j+1)),(dfs(matrix,i-1,j),dfs(matrix,i,j-1)))+1;
-}
-vector<vector<int> > updateMatrix(vector<vector<int> >& matrix) {
-        int m = matrix.size();
-        int n = matrix[0].size();
-        vector<vector<int> > res(m,vector<int>(n,0));
-        res[0][0] = matrix[0][0];
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-              res[i][j] = dfs(matrix,i,j);
-            }
-        }
-        return res;
+bool checkInclusion(string s1, string s2) {
+       vector<int> ans(26,0);
+       for(int i=0;i<s1.length();i++){
+           ans[s1[i]-'a']++;
+       }
+       vector<int> tmp = ans;
+       int j;
+       for(int i=0;i<s2.length()-s1.length();i++){
+           for(j=0;j<s1.length();j++){
+               
+               if(tmp[s2[i+j]-'a']<=0){
+                   break;
+               }else{
+                   tmp[s2[i+j]-'a']--;
+               }
+           }
+           cout<<j<<endl;
+           if(j==s1.length()) return true;
+           else {
+               tmp = ans;
+           }
+       }
+        return false;
     }
 int main(){
-   vector<vector<int> > s(3,vector<int>(3,0));
-   s[2][2] = 1;
-   updateMatrix(s);
+   cout<<checkInclusion("ab","222ba");
 }
