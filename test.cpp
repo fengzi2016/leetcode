@@ -7,30 +7,34 @@
 #include <unordered_map>
 #include<unordered_set>
 using namespace std;
-bool checkInclusion(string s1, string s2) {
-       vector<int> ans(26,0);
-       for(int i=0;i<s1.length();i++){
-           ans[s1[i]-'a']++;
-       }
-       vector<int> tmp = ans;
-       int j;
-       for(int i=0;i<s2.length()-s1.length();i++){
-           for(j=0;j<s1.length();j++){
-               
-               if(tmp[s2[i+j]-'a']<=0){
-                   break;
-               }else{
-                   tmp[s2[i+j]-'a']--;
-               }
-           }
-           cout<<j<<endl;
-           if(j==s1.length()) return true;
-           else {
-               tmp = ans;
-           }
-       }
-        return false;
-    }
+int coinChange2(vector<int>& coins, int amount, int c2, int c3, int c5){
+      vector<int> dp(amount+1,amount+1);
+      unordered_map<int,vector<int> > map;
+      int n[] = {c2,c3,c5};
+      vector<int> nums(n,n+3);
+      map.insert(make_pair(0,nums));
+      dp[0] = 0;
+      for(int i=1;i<=amount;i++){
+          for(int j=0;j<coins.size();j++){
+              if(i>=coins[j]){
+                cout<<map[i-coins[j]][j]<<endl;
+                if(map[i-coins[j]][j]>0){
+                //    dp[i] = min(dp[i],dp[i-coins[j]]+1);
+                //    if(dp[i]==dp[i-coins[j]]+1){
+                //       vector<int> tmp = map[i-coins[j]];
+                //       tmp[j]--;
+                //       map.insert(make_pair(i,tmp));
+                //   }
+                }  
+              }
+          }
+      }
+      return dp[amount]>amount?-1:dp[amount];
+  }
 int main(){
-   cout<<checkInclusion("ab","222ba");
+   int t[] = {2,3,5};
+   vector<int> coins(t,t+3);
+   int c2 = 1, c3 = 1, c5 = 1;
+   int v = 10;
+   cout<<coinChange2(coins,v,c2,c3,c5);
 }

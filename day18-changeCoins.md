@@ -1,0 +1,69 @@
+# 题目
+给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。
+
+示例 1:
+
+输入: coins = [1, 2, 5], amount = 11
+
+输出: 3 
+
+解释: 11 = 5 + 5 + 1
+
+# 思路
+动态规划，维护一个数组dp，dp[i]代表最少可以用dp[i]个硬币组合成i,假设。其中dp[0] = 0;
+
+假设总和为amout,可选硬币数组为coins,则状态转移方程为：dp[i] = min(dp[i],dp[i-coins[j]]+1);
+
+最后返回的时候要判断是否为-1，即dp[i]仍为初始值
+
+```c++
+  int coinChange(vector<int>& coins, int amount){
+      vector<int> dp(amount+1,amount+1);
+      dp[0] = 0;
+      for(int i=1;i<=amount;i++){
+          for(int j=0;j<coins.size();j++){
+              if(i>=coins[j]){
+                  dp[i] = min(dp[i],dp[i-coins[j]]+1);
+              }
+          }
+      }
+      return dp[amount]>amount?-1:dp[amount];
+  }
+```
+
+# 今日头条笔试第一题
+
+升级版changeCoins
+
+## 题目
+
+与上一题的区别是coins数量有限制，面值固定为2，3，5，数量限制为C1，C2，C3
+
+## 思路
+
+在上题的基础上维护一个数组nums，nums[0]=c2，nums[1]=c3，nums[2]=c5;
+
+在进行每一次操作时先判定nums所对应的值是否大于0。
+```c++
+    int coinChange2(vector<int>& coins, int amount, int c2, int c3, int c5){
+      vector<int> dp(amount+1,amount+1);
+      vector<int> nums = {c2,c3,c5};
+      dp[0] = 0;
+      for(int i=1;i<=amount;i++){
+          for(int j=0;j<coins.size();j++){
+              if(i>=coins[j]&&nums[j]>0){
+                  dp[i] = min(dp[i],dp[i-coins[j]]+1);
+                  if(dp[i]==dp[i-coins[j]]+1){
+                      nums[j]--;
+                  }
+              }
+          }
+      }
+      return dp[amount]>amount?-1:dp[amount];
+  }
+```
+
+
+
+
+
