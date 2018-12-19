@@ -47,6 +47,33 @@ vector<int> singer(vector<int> v1,vector<int> v2) {
         }
     }
 }
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) :val(x),left(NULL),right(NULL){}
+};
+bool hasPathSum(TreeNode* root, int sum) {
+        stack<TreeNode*> s;
+        if(!root) return false;
+        if(root->val<=sum) s.push(root);
+        int result = 0;
+        while(!s.empty()){
+            TreeNode* cur = s.top();
+            s.pop();
+            result += cur->val;
+            cout<<cur->val<<endl;
+            if(result==sum&&!cur->left&&!cur->right) return true;
+            if(cur->left&&cur->left->val+result<=sum){
+              s.push(cur->left);
+            }
+            if(cur->right&&cur->right->val+result<=sum){
+              s.push(cur->right);
+            }
+        }
+        return false;
+        
+    }
 
 int main(){
    int t1[] = {2,4,6,8,10};
@@ -57,5 +84,6 @@ int main(){
    int c2 = 1, c3 = 1, c5 = 2;
    int v = 10;
    vector<int> res=singer(vt1,vt2);
+   
   // cout<<coinChange2(coins,v,c2,c3,c5);
 }
