@@ -1,13 +1,10 @@
-#include<iostream>
-#include<cstdio>
-#include<algorithm>
-#include<stdio.h>
-#include<vector>
-#include<stack>
-#include<unordered_map>
-#include<unordered_set>
-#include<numeric> 
-#include<map>
+## 根据字符出现频率排序
+### [题目链接](https://leetcode-cn.com/explore/orignial/card/all-about-lockup-table/237/learn-to-use-dict/989/)
+### 思路
+用map记录,用priority_queue排序
+### 实现
+```c++
+  #include<map>
 #include<queue>
 using namespace std; 
 struct info {
@@ -48,7 +45,4 @@ struct info {
         }
         return ret;
     }
-int main(){
-  string tmp = "Aabb";
-  cout<<frequencySort(tmp)<<endl;
-}
+```
