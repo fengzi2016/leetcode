@@ -7,7 +7,8 @@
 - 一个变量控制向上还是向下的方向，用一个字符串数组进行记录。
 
 
-
+##  实现
+```c++
 string convert(string s, int numRows) {
       if(numRows==1) return s;
       string res;
@@ -25,3 +26,4 @@ string convert(string s, int numRows) {
       }
       return res;
     }
+```
