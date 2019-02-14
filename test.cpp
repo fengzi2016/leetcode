@@ -48,7 +48,20 @@ struct info {
         }
         return ret;
     }
+   int minCostClimbingStairs(vector<int>& cost) {
+        int size  = cost.size();
+        if(size==0) return 0;
+        if(size<=2) return min(cost[0],cost[1]);
+        vector<int> dp(size, 0);
+        dp[0] = cost[0];
+        dp[1] = cost[1];
+        for(int i=2;i<size;i++){
+            dp[i] = min(dp[i-1],dp[i-2])+cost[i];
+        }
+        return min(dp[size-1],dp[size-2]);
+    }
 int main(){
-  string tmp = "Aabb";
-  cout<<frequencySort(tmp)<<endl;
+  int a[] = {1, 100, 1, 1, 1, 100, 1, 1, 100, 1};
+  vector<int> v(begin(a),end(a));
+  cout<<minCostClimbingStairs(v);
 }
