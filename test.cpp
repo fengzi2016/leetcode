@@ -60,8 +60,46 @@ struct info {
         }
         return min(dp[size-1],dp[size-2]);
     }
+   bool isDengCha(vector<int>& subA) {
+        cout<<"size:"<<subA.size()<<endl;
+        if(subA.size()<3) return false;
+        int cha = subA[1] - subA[0];
+        cout<<"子序列"<<endl;
+        cout<<subA[0]<<subA[1];
+        for(int i=2;i<subA.size();i++){
+            cout<<subA[i];
+            if(subA[i]-subA[i-1]!=cha){
+                return false;
+            }
+        }
+        return true;
+    }
+ int numberOfArithmeticSlices(vector<int>& A) {
+        int size = A.size();
+        vector<int>::iterator it;
+        it=A.begin();
+        vector<vector<int> > dp(size,vector<int>(size,0));
+        for(int i = 0; i < size; i++){
+            for(int j = i+1; j< size; j++){
+                vector<int> tmp;
+                tmp.assign(it+i,it+j+1);
+                if(isDengCha(tmp)){
+                    dp[i][j] = dp[i][j-1] + 1;
+                } else {
+                    dp[i][j] = dp[i][j-1];
+                }
+                tmp.clear();
+            }
+        }
+        return dp[0][size-1] + 1;
+        // dp[i,j]表示从i到j的子等差数组的数量
+        // 如果i-1 到 i是等差，则dp[i-1,j] = dp[i,j] + 1
+        // 如果i 到 j+1 是等差，则dp[i, j+1] = dp[i,j] + 1
+        // 否则 dp[i-1,j] = dp[i,j+1] = dp[i,j];
+    }
+   
 int main(){
-  int a[] = {1, 100, 1, 1, 1, 100, 1, 1, 100, 1};
+  int a[] = {1,2,3};
   vector<int> v(begin(a),end(a));
-  cout<<minCostClimbingStairs(v);
+  cout<<numberOfArithmeticSlices(v);
 }
