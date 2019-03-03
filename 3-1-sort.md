@@ -119,7 +119,7 @@ function jishu(nums){
       iv >= basic && right.push(iv);
       iv < basic && left.push(iv);
     }
-    return left.quickSort().concat(basic,right.qucikSort());
+    return left.quickSort().concat(basic,right.quickSort());
   }
 ```
 ### c 非递归法
