@@ -6,7 +6,7 @@
 ```c++
   public class Solution {
     public string LongestPalindrome(string s) {
-                    int len = s.Length;
+            int len = s.Length;
             if (len <= 1) return s;
             bool[ , ] dp = new bool[len, len];
             int resLeft = 0, resRight = 0;

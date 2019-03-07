@@ -1,20 +1,24 @@
-function mergeSort(arr){
-  if(arr.length<2)return arr;
-  const mi = Math.floor(arr.length / 2);
-  const left = arr.slice(0,mi);
-  const right = arr.slice(mi);
-  return merge(mergeSort(left),mergeSort(right));
-}
-function merge(left,right){
-  const result = [];
-  while(left.length > 0 && right.length > 0){
-    if(left[0]<right[0]){
-      result.push(left.shift());
-    }else{
-      result.push(right.shift());
-    }
+class EventEmitter {
+  constructor() {
+    this.events = {};
   }
-  return result.concat(left,right);
+  on(eventName,func){
+    if(!this.events[eventName]){
+      this.events[eventName] = [];
+    }
+    this.events[eventName].push(func);
+  }
+  emit(eventName,...args){
+    if(!this.events[eventName]) return;
+    const callbacks = this.events[eventName];
+    callbacks.forEach((fn)=>{
+      fn(args);
+    });
+  }
+  off(eventName,func){
+    if(!this.events[eventName]) return;
+    const callbacks = this.events[eventName];
+    let index = callbacks.indexof(func);
+    callbacks.splice(index,1);
+  }
 }
-
-console.log(mergeSort([1,2,3,2,1]));
