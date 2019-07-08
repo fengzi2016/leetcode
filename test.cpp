@@ -41,22 +41,8 @@ vector<int> arr;
 /*请完成下面这个函数，实现题目要求的功能
 当然，你也可以不按照下面这个模板来作答，完全按照自己的想法来 ^-^ 
 ******************************开始写代码******************************/
-int solution() {
-    map<int,int> threes;
-    int result = 0;
-    int i = 2;
-    int n = pow(3,i);
-    while(n <= pow(10,9)){
-          threes[n] = i++;
-          n = pow(3,i);
-      }
-    for(int j = 0; j < arr.size(); j++){
-        if(threes.count(arr[j])){
-            result += threes[arr[j]];
-        }
-    }
-    return result;
-
+ vector<int> sortedSquares(vector<int>& A) {
+    
 }
 /******************************结束写代码******************************/
 
